@@ -1,7 +1,7 @@
 .venv/
 venv/
 ENV/
-
+__marimo__/session
 __pycache__/
 *.pyc
 *.pyo
