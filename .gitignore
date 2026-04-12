@@ -11,7 +11,7 @@ __pycache__/
 .fastai/
 data/
 models/
-
+__marimo__/
 .marimo/
 *.marimo 
 
