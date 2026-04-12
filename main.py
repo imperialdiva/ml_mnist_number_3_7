@@ -154,7 +154,7 @@ def _(Image, path, tensor, torch):
     valid_7_tens = torch.stack([tensor(Image.open(o)) for o in (path/'valid'/'7').ls()])
     valid_7_tens = valid_7_tens.float()/255
     valid_3_tens.shape, valid_7_tens.shape
-    return (valid_3_tens,)
+    return valid_3_tens, valid_7_tens
 
 
 @app.function
@@ -186,6 +186,19 @@ def _(mean3, mean7):
 @app.cell
 def _(a_3, is_3):
     is_3(a_3), is_3(a_3).float()
+    return
+
+
+@app.cell
+def _(is_3, valid_3_tens, valid_7_tens):
+    accuracy_3s = is_3(valid_3_tens).float().mean()
+    accuracy_7s = (1 - is_3(valid_7_tens).float().mean())
+    accuracy_7s, accuracy_3s, (accuracy_7s + accuracy_3s) / 2
+    return
+
+
+@app.cell
+def _():
     return
 
 
